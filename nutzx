@@ -1,0 +1,32 @@
+require 'AfricasTalking'
+
+# Set your app credentials
+username = "MyApp_Username"
+apikey   = "MyApp_"
+
+# Initialize the SDK
+AT=AfricasTalking::Initialize.new username, apikey
+# Get the voice service
+voice = AT.voice
+
+# Set your Africa's Talking phone number in international format
+callFrom = "+254711082XXX"
+
+# Set the numbers you want to call to in a comma-separated list
+callTo = "+254704217245
+
+options = {
+  "to" => callTo,
+  "from" => callFrom,
+}
+begin
+  # Make the call
+  results = voice.call options
+  puts results.to_yaml
+
+  puts "Calls have been initiated. Time for song and dance!\n";
+rescue AfricasTalking::AfricasTalkingException => ex
+    puts 'Encountered an error: ' + ex.message
+end
+
+# DONE!
